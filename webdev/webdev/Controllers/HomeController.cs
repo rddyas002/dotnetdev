@@ -24,7 +24,7 @@ namespace webdev.Controllers
 
         public IActionResult Contact()
         {
-            //ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Me!";
 
             return View();
         }
