@@ -1,7 +1,7 @@
 if (google.loader.ClientLocation != null) {
-    document.write("Your Location Is: " + google.loader.ClientLocation.address.city + ", " + google.loader.ClientLocation.address.region);
+    console.log("Your Location Is: " + google.loader.ClientLocation.address.city + ", " + google.loader.ClientLocation.address.region);
 } else {
-    document.write("Your Location Was Not Detected By Google Loader");
+    console.log("Your Location Was Not Detected By Google Loader");
 }
 
 // start up view
