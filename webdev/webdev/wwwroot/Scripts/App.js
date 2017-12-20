@@ -1,3 +1,18 @@
+var loc = {};
+var geocoder = new google.maps.Geocoder();
+if (google.loader.ClientLocation) {
+    loc.lat = google.loader.ClientLocation.latitude;
+    loc.lng = google.loader.ClientLocation.longitude;
+
+    var latlng = new google.maps.LatLng(loc.lat, loc.lng);
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            alert(results[0]['formatted_address']);
+        };
+    });
+    console.log("Client location: " + loc);
+}
+
 // start up view
 var extent = Cesium.Rectangle.fromDegrees(10, 10, 10, 10);
 Cesium.Camera.DEFAULT_VIEW_FACTOR = 5;
