@@ -1,16 +1,7 @@
-var loc = {};
-var geocoder = new google.maps.Geocoder();
-if (google.loader.ClientLocation) {
-    loc.lat = google.loader.ClientLocation.latitude;
-    loc.lng = google.loader.ClientLocation.longitude;
-
-    var latlng = new google.maps.LatLng(loc.lat, loc.lng);
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            alert(results[0]['formatted_address']);
-        };
-    });
-    console.log("Client location: " + loc);
+if (google.loader.ClientLocation != null) {
+    document.write("Your Location Is: " + google.loader.ClientLocation.address.city + ", " + google.loader.ClientLocation.address.region);
+} else {
+    document.write("Your Location Was Not Detected By Google Loader");
 }
 
 // start up view
