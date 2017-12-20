@@ -3,6 +3,8 @@ var extent = Cesium.Rectangle.fromDegrees(10, 10, 10, 10);
 Cesium.Camera.DEFAULT_VIEW_FACTOR = 5;
 Cesium.Camera.DEFAULT_VIEW_RECTANGLE = extent;
 
+Cesium.BingMapsApi.defaultKey = "f9bi6fIZNm3w98sNXXhR~H1vdqlbzNAuLNn6607rNiA~AhiZmKtvhQltEYCRO3P6Z7yugnt - UVX4wFSoVOdgpiU5MNT4Af9bUCBUJJszna9a";
+
 // main viewer
 var viewer = new Cesium.Viewer('cesiumContainer', {
 /*    imageryProvider: new Cesium.createTileMapServiceImageryProvider({
