@@ -37,7 +37,11 @@ namespace webdev
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ServeUnknownFileTypes = true,
+                DefaultContentType = "image/jpg"
+            });
 
             app.UseMvc(routes =>
             {
