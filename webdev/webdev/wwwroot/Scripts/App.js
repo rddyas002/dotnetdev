@@ -1,8 +1,4 @@
-if (google.loader.ClientLocation != null) {
-    console.log("Your Location Is: " + google.loader.ClientLocation.address.city + ", " + google.loader.ClientLocation.address.region);
-} else {
-    console.log("Your Location Was Not Detected By Google Loader");
-}
+var client_location;
 
 // start up view
 var extent = Cesium.Rectangle.fromDegrees(10, 10, 10, 10);
@@ -61,6 +57,26 @@ var terrainProvider = new Cesium.CesiumTerrainProvider({
 });
 viewer.terrainProvider = terrainProvider;
 var primitives = viewer.scene.primitives;
+
+// get position
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
+
+var points = viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection());
+
+function showPosition(position) {
+    client_location = position;
+    points.add({
+        position: new Cesium.Cartesian3.fromDegrees(position.coords.longitude, position.coords.latitude),
+        color: Cesium.Color.RED,
+        pixelSize: 6.0,
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 2.0,
+    });
+}
 
 /*
 // Load spaceteq logo
