@@ -1,0 +1,3 @@
+[submodule "webdev/webdev/wwwroot/Scripts/cesium-assets"]
+	path = webdev/webdev/wwwroot/Scripts/cesium-assets
+	url = https://github.com/AnalyticalGraphicsInc/cesium-assets.git
