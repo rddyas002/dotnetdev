@@ -3,9 +3,6 @@ var extent = Cesium.Rectangle.fromDegrees(10, 10, 10, 10);
 Cesium.Camera.DEFAULT_VIEW_FACTOR = 5;
 Cesium.Camera.DEFAULT_VIEW_RECTANGLE = extent;
 
-var image_viewer;
-var solar_viewer;
-
 // main viewer
 var viewer = new Cesium.Viewer('cesiumContainer', {
 /*    imageryProvider: new Cesium.createTileMapServiceImageryProvider({
@@ -46,45 +43,6 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load('/images/eez.json', {
     markerSymbol: '?'
 }));
 
-/*
-var solar_viewer = new Cesium.Viewer('solarPanelViewInside', {
-    timeline: false,
-    animation: false,
-    homeButton: false,
-    infoButton: false,
-    navigationHelpButton: false,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    geocoder: false,
-    baseLayerPicker: false,
-    automaticallyTrackDataSourceClocks: false,
-    skyBox: new Cesium.SkyBox({
-        sources: {
-            positiveX: '/Scripts/cesium-assets/stars/TychoSkymapII.t3_08192x04096/TychoSkymapII.t3_08192x04096_80_px.jpg',
-            negativeX: '/Scripts/cesium-assets/stars/TychoSkymapII.t3_08192x04096/TychoSkymapII.t3_08192x04096_80_mx.jpg',
-            positiveY: '/Scripts/cesium-assets/stars/TychoSkymapII.t3_08192x04096/TychoSkymapII.t3_08192x04096_80_py.jpg',
-            negativeY: '/Scripts/cesium-assets/stars/TychoSkymapII.t3_08192x04096/TychoSkymapII.t3_08192x04096_80_my.jpg',
-            positiveZ: '/Scripts/cesium-assets/stars/TychoSkymapII.t3_08192x04096/TychoSkymapII.t3_08192x04096_80_pz.jpg',
-            negativeZ: '/Scripts/cesium-assets/stars/TychoSkymapII.t3_08192x04096/TychoSkymapII.t3_08192x04096_80_mz.jpg'
-        },
-        show: true
-    }),
-    creditContainer: 'dummy',
-    useDefaultRenderLoop: false
-});
-
-solar_viewer.fullscreenButton.destroy();
-
-// disable the default event handlers
-solar_viewer.scene.screenSpaceCameraController.enableRotate = false;
-solar_viewer.scene.screenSpaceCameraController.enableTranslate = false;
-solar_viewer.scene.screenSpaceCameraController.enableZoom = false;
-solar_viewer.scene.screenSpaceCameraController.enableTilt = false;
-solar_viewer.scene.screenSpaceCameraController.enableLook = false;
-
-solar_viewer.scene.globe.enableLighting = true;
-*/
-
 //Enable lighting based on sun/moon positions
 viewer.scene.globe.enableLighting = true;
 
@@ -93,10 +51,10 @@ var terrainProvider = new Cesium.CesiumTerrainProvider({
     url: '//assets.agi.com/stk-terrain/world',
     requestWaterMask: true
 });
-//viewer.terrainProvider = terrainProvider;
-
+viewer.terrainProvider = terrainProvider;
 var primitives = viewer.scene.primitives;
-  
+
+/*
 // Load spaceteq logo
 var logoUrl = '/images/spaceteq3.jpg';
 var logHart = '/images/sansa.jpg';
@@ -137,14 +95,7 @@ var dish = viewer.scene.primitives.add(Cesium.Model.fromGltf({
     modelMatrix: GsLocationDish,
     scale: 2.0
 }));
-/*
-var EOSat1 = viewer.scene.primitives.add(Cesium.Model.fromGltf({
-    url: '../images/EOSat1_SD/EOSat1_SD.gltf',
-    modelMatrix: Cesium.Matrix4.IDENTITY,
-    minimumPixelSize: 30.0,
-    allowPicking: true
-}));
-*/
+
 // ground position in fixed frame
 var groundInFixed = Cesium.Cartesian3.fromDegrees(19.128978, -34.226049);
 // find transform for fixed to North, East, Down for GS
@@ -183,3 +134,4 @@ viewer.clock.multiplier = czml_EOSat1[0].clock.multiplier;
 viewer.clock.shouldAnimate = false;
 czmlDataSource.process(czml_EOSat1);
 viewer.dataSources.add(czmlDataSource);
+*/
