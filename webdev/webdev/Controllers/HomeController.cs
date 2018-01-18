@@ -36,6 +36,13 @@ namespace webdev.Controllers
             return View();
         }
 
+        public IActionResult ctfcWakes()
+        {
+            ViewData["Message"] = "Your visualise page.";
+
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

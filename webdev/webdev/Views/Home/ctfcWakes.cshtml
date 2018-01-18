@@ -1,0 +1,153 @@
+﻿@{
+    ViewData["Title"] = "ctfcWakes";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <title>Cesium demonstration</title>
+
+    <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="~/Scripts/mqtt/paho.javascript-1.0.3/paho-mqtt.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/three/three.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/cesium-sensor-volumes.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+
+    <style type="text/css">
+        #cesiumContainer {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        .btn-group button {
+            cursor: pointer;
+            width: 120px;
+            display: block;
+            padding: 0px;
+            border-radius: 5px;
+            border-top: 10px;
+            color: black;
+        }
+
+        #taskbar {
+            position: absolute;
+            left: 0px;
+            top: 50px;
+            height: 50px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cesiumContainer">
+        <!--
+        <div class="cesium-cesiumInspector" style="position:absolute;left:0px;top:0px;z-index:50;margin:10px;width:190px;">
+            <h5 style="text-align:center"> <b>STQ CAN control</b></h5>
+            <div class="btn-group">
+                <div id="simLink" style="background-color:red;text-align:center;width:100%;padding:5px;">Waiting for Simulator</div>
+                <div id="satInView" style="background-color:red;text-align:center;width:100%;padding:5px;">Satellite NOT View</div>
+                <div id="simTime">Simulation time:<br />N/A</div>
+                <button id="sync">Synchronise</button>
+                <button id="loadPrevMission">Load Mission</button>
+                <button id="loadHistory">Load History</button>
+                <button id="resetTime">Reset Time</button>
+                <p></p>
+                <button id="ImagerView">Follow EOSAT1</button>
+                <button id="homeView">Home View</button>
+                <button id="columbusView">Columbus View</button>
+                <button id="groundView">Ground Station</button>
+                <hr>
+                <label for="trackSimTimeChk">Track Simulation</label>
+                <input type="checkbox" id="trackSimTimeChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showFrameChk">Body Frame</label>
+                <input type="checkbox" id="showFrameChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showMedResChk">MedRes Line Scan</label>
+                <input type="checkbox" id="showMedResChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showBeamChk">HighRes Line Scan</label>
+                <input type="checkbox" id="showBeamChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showMatrixSensorChk">Matrix Sensor</label>
+                <input type="checkbox" id="showMatrixSensorChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showOpticalAxisChk">Optical Axis</label>
+                <input type="checkbox" id="showOpticalAxisChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showXbandSensorChk">X-Band Antenna</label>
+                <input type="checkbox" id="showXbandSensorChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <label for="showImageViewChk">Imager View</label>
+                <input type="checkbox" id="showImageViewChk" value="off" style="vertical-align:text-bottom;float: right;">
+                <hr>
+                <h5 style="text-align:center"> <b>EOSAT1 Telemetry</b></h5>
+                <table style="width:100%">
+                    <tr>
+                        <td>Latitude (deg):</td>
+                        <td id="latitudeLbl" align="right">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Longitude (deg):</td>
+                        <td id="longitudeLbl" align="right">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Height (km):</td>
+                        <td id="heightLbl" align="right">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Elevation (deg):</td>
+                        <td id="elevationLbl" align="right">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Azimuth (deg):</td>
+                        <td id="azimuthLbl" align="right">N/A</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="cesiumScenePicker">
+            <div class="cesium-sceneModePicker"></div>
+        </div>
+        <div id="cesiumHome">
+            <div class="cesium-sceneModePicker"></div>
+        </div>
+
+        <div id="imagerView" class="cesium-cesiumInspector" style="position:absolute;bottom:40px;right:0px;z-index:50;margin:10px;width:410px;height:400px;padding-bottom:50px;overflow:hidden;">
+            <h5 style="text-align:center"><b>Imager View</b></h5>
+            <div id="imageViewInside" style="height:100%;background-color:black;"></div>
+        </div>
+
+        -->
+        <!--
+        <div id="solarPanelView" class="cesium-cesiumInspector" style="position:absolute;bottom:450px;right:0px;z-index:50;margin:10px;width:200px;height:200px;padding-bottom:50px;">
+            <h5 style="text-align:center"><b>Solar Panel View</b></h5>
+            <div id="solarPanelViewInside" style="height:100%;background-color:black;"></div>
+        </div>
+        <div id="rwView" class="cesium-cesiumInspector" style="position:absolute;bottom:450px;right:210px;z-index:50;margin:10px;width:200px;height:200px;padding-bottom:50px;overflow:hidden;">
+            <h5 style="text-align:center"><b>Reaction Wheels View</b></h5>
+            <div id="rwViewInside" style="height:100%;background-color:black;"></div>
+        </div>
+        -->
+        <!-- Dummy div to hold credits -->
+        <div id="dummy" class="cesium-cesiumInspector" style="position:absolute;bottom:40px;right:0px;margin:10px;width:410px;height:400px;display:none;">
+
+        </div>
+    </div>
+
+    <script src="~/Scripts/ctfcWakes.js"></script>
+
+    <!--
+
+    <script src="~/Scripts/wsConn.js"></script>
+    <script src="~/Scripts/ReactionWheel.js"></script>
+        -->
+</body>
+</html>
