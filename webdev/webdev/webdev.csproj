@@ -5,42 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Scripts\**" />
+    <Content Remove="Scripts\**" />
+    <EmbeddedResource Remove="Scripts\**" />
+    <None Remove="Scripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Scripts\cesium-assets\.git\config" />
-    <None Include="Scripts\cesium-assets\.git\description" />
-    <None Include="Scripts\cesium-assets\.git\HEAD" />
-    <None Include="Scripts\cesium-assets\.git\hooks\applypatch-msg.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\commit-msg.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\post-update.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\pre-applypatch.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\pre-commit.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\pre-push.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\pre-rebase.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\pre-receive.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\prepare-commit-msg.sample" />
-    <None Include="Scripts\cesium-assets\.git\hooks\update.sample" />
-    <None Include="Scripts\cesium-assets\.git\index" />
-    <None Include="Scripts\cesium-assets\.git\info\exclude" />
-    <None Include="Scripts\cesium-assets\.git\logs\HEAD" />
-    <None Include="Scripts\cesium-assets\.git\logs\refs\heads\master" />
-    <None Include="Scripts\cesium-assets\.git\logs\refs\remotes\origin\HEAD" />
-    <None Include="Scripts\cesium-assets\.git\objects\pack\pack-faa6a387db15eb06a1f6af74c93083713dd73974.idx" />
-    <None Include="Scripts\cesium-assets\.git\objects\pack\pack-faa6a387db15eb06a1f6af74c93083713dd73974.pack" />
-    <None Include="Scripts\cesium-assets\.git\packed-refs" />
-    <None Include="Scripts\cesium-assets\.git\refs\heads\master" />
-    <None Include="Scripts\cesium-assets\.git\refs\remotes\origin\HEAD" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Scripts\cesium-assets\.git\objects\info\" />
-    <Folder Include="Scripts\cesium-assets\.git\refs\tags\" />
   </ItemGroup>
 
 </Project>
