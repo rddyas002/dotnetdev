@@ -25,9 +25,9 @@ var primitives = scene.primitives;
 // form entities in cmzl form
  
 // Create websocket
-var socket = io();
+// var socket = io();
 var czmlDataSource = new Cesium.CzmlDataSource();
-console.log('Websocket opened');
+//console.log('Websocket opened');
 viewer.camera.flyTo({
     destination : Cesium.Cartesian3.fromDegrees(18.837977, 0, 15000000.0)
 });
@@ -35,7 +35,7 @@ viewer.camera.flyTo({
 var start = Cesium.JulianDate.fromDate(new Date());
 viewer.clock.currentTime = start.clone();
 viewer.clock.startTime = start.clone();
- 
+ /*
 socket.on('czml-test', function(msg){
     var response = JSON.parse(msg);
     viewer.entities.removeAll();
@@ -55,3 +55,34 @@ socket.on('czml-test', function(msg){
     });
     console.log(response.dt);
 });
+*/
+client = new Paho.MQTT.Client("104.196.195.27", 1884, "clientId");
+// set callback handlers
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
+
+// Connect the client, with a Username and Password
+client.connect({
+    onSuccess: onConnect,
+    userName: "yashren",
+    password : "mqtt"
+});
+
+// called when the client connects
+function onConnect() {
+    // Once a connection has been made, make a subscription and send a message.
+    console.log("onConnect");
+    client.subscribe("TrackMe");
+}
+
+// called when the client loses its connection
+function onConnectionLost(responseObject) {
+    if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:" + responseObject.errorMessage);
+    }
+}
+
+// called when a message arrives
+function onMessageArrived(message) {
+    console.log("onMessageArrived:" + message.payloadString);
+}
