@@ -56,7 +56,7 @@ socket.on('czml-test', function(msg){
     console.log(response.dt);
 });
 */
-client = new Paho.MQTT.Client("104.196.195.27", Number(1884), "/wss","clientId");
+client = new Paho.MQTT.Client("104.196.195.27", Number(1884), "clientId");
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
@@ -65,7 +65,8 @@ client.onMessageArrived = onMessageArrived;
 client.connect({
     onSuccess: onConnect,
     userName: "yashren",
-    password : "mqtt"
+    password: "mqtt",
+    useSSL: true
 });
 
 // called when the client connects
