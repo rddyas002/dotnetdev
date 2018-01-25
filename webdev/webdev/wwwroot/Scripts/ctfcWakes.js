@@ -66,7 +66,7 @@ client.connect({
     onSuccess: onConnect,
     userName: "yashren",
     password: "mqtt",
-    useSSL: true
+    useSSL: false
 });
 
 // called when the client connects
