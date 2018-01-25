@@ -56,7 +56,7 @@ socket.on('czml-test', function(msg){
     console.log(response.dt);
 });
 */
-client = new Paho.MQTT.Client("104.196.195.27", Number(8883), "clientId");
+client = new Paho.MQTT.Client("104.196.195.27", Number(8083), "clientId");
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
